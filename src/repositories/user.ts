@@ -2,7 +2,7 @@ import prisma from '../../prisma'
 
 import type { UserCreateI } from '../types/user'
 
-const createUser = async (data: UserCreateI) => {
+export const createUser = async (data: UserCreateI) => {
 	const user = await prisma.user.create({
 		data,
 	})
@@ -12,7 +12,7 @@ const createUser = async (data: UserCreateI) => {
 	return user
 }
 
-const getUserByUsername = async (username: string) => {
+export const getUserByUsername = async (username: string) => {
 	const user = await prisma.user.findUnique({
 		where: { username },
 	})
@@ -22,7 +22,7 @@ const getUserByUsername = async (username: string) => {
 	return user
 }
 
-const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (email: string) => {
 	const user = await prisma.user.findUnique({
 		where: { email },
 	})
@@ -31,5 +31,3 @@ const getUserByEmail = async (email: string) => {
 
 	return user
 }
-
-export { createUser, getUserByUsername, getUserByEmail }

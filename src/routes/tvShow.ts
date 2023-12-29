@@ -4,13 +4,13 @@ import { userAuthenticator } from '../middlewares/authentication'
 import type { FastifyInstance } from 'fastify'
 
 export const tvShowRoutes = async (app: FastifyInstance) => {
-	app.get(
+	app.post(
 		'/user/:userId/tvshow',
 		{
 			preValidation: [userAuthenticator],
 		},
 		async (req, reply) => {
-			addTvShowController(req, reply)
+			await addTvShowController(req, reply)
 		}
 	)
 }

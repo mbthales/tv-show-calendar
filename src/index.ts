@@ -2,7 +2,7 @@ import fastify from 'fastify'
 import cookie from '@fastify/cookie'
 
 import userRoutes from './routes/user'
-import { tvShowRoutes } from './routes/tvshow'
+import { tvShowRoutes } from './routes/tvShow'
 
 const app = fastify()
 

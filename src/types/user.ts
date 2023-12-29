@@ -1,7 +1,10 @@
-interface UserCreateI {
+export interface UserCreateI {
 	username: string
 	email: string
 	password: string
 }
 
-export { UserCreateI }
+export interface UserJwtI {
+	userId: string
+	username: string
+}

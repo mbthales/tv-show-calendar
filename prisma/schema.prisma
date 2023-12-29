@@ -8,34 +8,21 @@ datasource db {
 }
 
 model User {
-   id        String     @id @default(cuid())
-   email     String     @unique
-   username  String     @unique
-   password  String
-   createdAt DateTime   @default(now())
-   updatedAt DateTime   @updatedAt
-   TvShow    TvShows[]
-   Episodes  Episodes[]
-}
-
-model TvShows {
-   id        String     @id @default(cuid())
-   tvShowId  String     @unique
-   userId    String
-   createdAt DateTime   @default(now())
-   updatedAt DateTime   @updatedAt
-   user      User       @relation(fields: [userId], references: [id])
-   Episodes  Episodes[]
-}
-
-model Episodes {
    id        String   @id @default(cuid())
-   number    Int
-   isWatched Boolean  @default(false)
-   tvShowId  String
+   email     String   @unique
+   username  String   @unique
+   password  String
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+   TvShow    TvShow[]
+}
+
+model TvShow {
+   id        String   @id @default(cuid())
+   tvShowId  String   @unique
+   episodes  Json
    userId    String
    createdAt DateTime @default(now())
    updatedAt DateTime @updatedAt
    user      User     @relation(fields: [userId], references: [id])
-   tvShow    TvShows  @relation(fields: [tvShowId], references: [id])
 }

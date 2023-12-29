@@ -2,12 +2,14 @@ import fastify from 'fastify'
 import cookie from '@fastify/cookie'
 
 import userRoutes from './routes/user'
+import { tvShowRoutes } from './routes/tvshow'
 
 const app = fastify()
 
 app.register(cookie)
 
 userRoutes(app)
+tvShowRoutes(app)
 
 app.listen({ port: 3000 }, (err, address) => {
 	if (err) {

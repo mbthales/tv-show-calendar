@@ -107,15 +107,10 @@ export const loginController = async (
 
 		const token = generateJwt(user.id, user.username)
 
-		reply.setCookie('token', token, {
-			httpOnly: true,
-			sameSite: 'strict',
-			expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-		})
+		reply.header('Authorization', `Bearer ${token}`)
 
 		reply.code(200).send({
 			msg: 'User logged in successfully',
-			token,
 		})
 	} catch (err) {
 		console.error(err)

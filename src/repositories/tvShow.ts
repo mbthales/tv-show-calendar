@@ -45,3 +45,43 @@ export const getWatchedTvShowsByUser = async (userId: string) => {
 
 	return watchedTvShows
 }
+
+export const getWatchedTvShowByUserIdAndTvShowId = async (
+	userId: string,
+	tvShowId: string
+) => {
+	const watchedTvShows = await prisma.watchedTvShow.findUnique({
+		where: {
+			userId_tvShowId: {
+				userId,
+				tvShowId,
+			},
+		},
+	})
+
+	prisma.$disconnect()
+
+	return watchedTvShows
+}
+
+export const updateEpisodeWatchedTvShow = async (
+	userId: string,
+	tvShowId: string,
+	episodes: string
+) => {
+	const watchedTvShows = await prisma.watchedTvShow.update({
+		where: {
+			userId_tvShowId: {
+				userId,
+				tvShowId,
+			},
+		},
+		data: {
+			episodes,
+		},
+	})
+
+	prisma.$disconnect()
+
+	return watchedTvShows
+}

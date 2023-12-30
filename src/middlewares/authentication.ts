@@ -1,7 +1,7 @@
+import { verifyJwt } from '../utils/jwt'
+
 import type { FastifyRequest, FastifyReply } from 'fastify'
 import type { UserJwtI } from '../types/user'
-
-import { verifyJwt } from '../utils/jwt'
 
 export const userAuthenticator = async (
 	req: FastifyRequest,

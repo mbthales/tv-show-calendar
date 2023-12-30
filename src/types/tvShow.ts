@@ -4,14 +4,16 @@ export interface TvShowCreateI {
 	premiered: string
 }
 
+export interface WatchedTvShowEpisodesI {
+	name: string
+	season: number
+	number: number
+	airdate: string
+	isWatched: boolean
+}
+
 export interface WatchedTvShowCreateI {
-	episodes: {
-		name: string
-		season: number
-		number: number
-		airdate: string
-		isWatched: boolean
-	}[]
+	episodes: string
 	tvShowId: string
 	userId: string
 }

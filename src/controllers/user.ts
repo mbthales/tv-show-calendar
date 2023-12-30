@@ -1,5 +1,3 @@
-import type { FastifyRequest, FastifyReply } from 'fastify'
-
 import { registerSchema, loginSchema } from '../validators/user'
 import {
 	createUser,
@@ -8,6 +6,8 @@ import {
 } from '../repositories/user'
 import { hashPassword, comparePassword } from '../utils/password'
 import { generateJwt } from '../utils/jwt'
+
+import type { FastifyRequest, FastifyReply } from 'fastify'
 
 export const registerController = async (
 	req: FastifyRequest,

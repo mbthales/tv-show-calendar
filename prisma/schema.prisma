@@ -29,7 +29,7 @@ model TvShow {
 
 model WatchedTvShow {
    id        String   @id @default(cuid())
-   episodes  Json
+   episodes  String
    userId    String
    tvShowId  String
    createdAt DateTime @default(now())

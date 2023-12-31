@@ -95,6 +95,7 @@ export default function SearchTvShow() {
 			headers: {
 				Authorization:
 					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbHFwdzFkYWcwMDAwM3piZXJ0cmZqMmhlIiwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNzAzOTcwOTU3LCJleHAiOjE3MDY1NjI5NTd9.USDv-58wUMvVWeUGKz9Xt60Rc6n58Oq6PkPo77XztNY',
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				name: tvShowName,

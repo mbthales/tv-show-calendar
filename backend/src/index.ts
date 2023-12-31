@@ -1,5 +1,6 @@
 import fastify from 'fastify'
 import cookie from '@fastify/cookie'
+import cors from '@fastify/cors'
 
 import userRoutes from './routes/user'
 import { tvShowRoutes } from './routes/tvShow'
@@ -7,6 +8,10 @@ import { tvShowRoutes } from './routes/tvShow'
 const app = fastify()
 
 app.register(cookie)
+app.register(cors, {
+	origin: 'http://localhost:3001',
+	credentials: true,
+})
 
 userRoutes(app)
 tvShowRoutes(app)

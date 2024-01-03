@@ -1,72 +1,69 @@
-import { format, getDate, parseISO, isAfter, subMonths } from 'date-fns'
+interface Episode {
+	[byYear: string]: {
+		[byMonth: string]: {
+			tvShowName: string
+			episodeName: string
+			number: number
+			season: number
+			airdate: string
+			isWatched: boolean
+		}[]
+	}
+}
 
 async function fetchEpisodes() {
-	const url = 'http://localhost:3000/user/clqpw1dag00003zbertrfj2he/tvshow'
+	const url =
+		'http://localhost:3000/user/clqx1s9bu0000n5itwg4hlu4w/tvShow/episode'
 	const res = await fetch(url, {
+		cache: 'no-cache',
 		method: 'GET',
 		headers: {
 			Authorization:
-				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbHFwdzFkYWcwMDAwM3piZXJ0cmZqMmhlIiwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNzAzOTcwOTU3LCJleHAiOjE3MDY1NjI5NTd9.USDv-58wUMvVWeUGKz9Xt60Rc6n58Oq6PkPo77XztNY',
+				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbHF4MXM5YnUwMDAwbjVpdHdnNGhsdTR3IiwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNzA0MjQyMjAwLCJleHAiOjE3MDY4MzQyMDB9.V6squSL-rWMMBwcrzrqloODGHzUhNwAY0cMxU00g6CQ',
 		},
 	})
 	const resData = await res.json()
-	const data = resData.data as { episodes: string }[]
-	const episodes = data
-		.map((tvshow) => {
-			return JSON.parse(tvshow.episodes)
-		})
-		.flat()
-		.sort(
-			(a, b) => new Date(a.airdate).getTime() - new Date(b.airdate).getTime()
-		)
 
-	return episodes
-}
-
-interface Episode {
-	airdate: string
-	name: string
-	number: number
-	season: number
+	return resData.data as Episode
 }
 
 export default async function Episodes() {
-	const episodes = (await fetchEpisodes()) as Episode[]
+	const episodes = await fetchEpisodes()
 
-	const recentEpisodes = episodes.filter((episode) => {
-		const episodeDate = parseISO(episode.airdate)
-		const oneMonthAgo = subMonths(new Date(), 1)
-		return isAfter(episodeDate, oneMonthAgo)
-	})
-	const groupedEpisodes = recentEpisodes.reduce(
-		(groups: { [key: string]: Episode[] }, episode) => {
-			const date = parseISO(episode.airdate)
-			const key = format(date, 'yyyy-MM')
-
-			if (!groups[key]) {
-				groups[key] = []
-			}
-			groups[key].push(episode)
-			return groups
-		},
-		{} as { [key: string]: Episode[] }
-	)
+	const episodeCount = (season: number, number: number) => {
+		return `S${season.toString().padStart(2, '0')}E${number
+			.toString()
+			.padStart(2, '0')}`
+	}
 
 	return (
 		<div>
-			{Object.entries(groupedEpisodes).map(([key, episodes]) => {
-				const [year, month] = key.split('-')
-
+			{Object.entries(episodes).map(([year, months]) => {
 				return (
-					<div key={key} className="mb-6">
-						<h2 className="font-bold">{`${month}/${year}`}</h2>
-						{episodes.map(({ number, name, season, airdate }) => (
-							<div key={number} className="flex gap-4">
-								<p>{name}</p>
-								<p>
-									{season}X{number}
-								</p>
-								<p>Day {getDate(parseISO(airdate))}</p>
+					<div key={year}>
+						<h2 className="font-bold text-2xl mt-6">{year}</h2>
+						{Object.entries(months).map(([month, episodes]) => (
+							<div key={month}>
+								<h3 className="text-xl mt-4 mb-2">{month}</h3>
+								{episodes.map(
+									({
+										tvShowName,
+										episodeName,
+										season,
+										number,
+										airdate,
+									}) => (
+										<div key={number} className="flex gap-4">
+											<p>{tvShowName}</p>
+											<p>
+												{episodeName} -{' '}
+												{episodeCount(season, number)}
+											</p>
+											<p>{airdate}</p>
+											<button>Watched</button>
+										</div>
+									)
+								)}
 							</div>
 						))}
 					</div>

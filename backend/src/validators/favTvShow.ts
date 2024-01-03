@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const watchedTvShowSchema = z.object({
+export const favTvShowSchema = z.object({
 	name: z.string().trim(),
 	poster: z.string().trim(),
 	premiered: z.string().trim(),

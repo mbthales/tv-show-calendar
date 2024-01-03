@@ -80,7 +80,7 @@ export default function SearchTvShow() {
 	const saveFavTvShow = async (tvShowId: number) => {
 		const episodes = await fetchEpisodesFavTvShows(tvShowId)
 
-		const url = `http://localhost:3000/user/clqpw1dag00003zbertrfj2he/tvshow`
+		const url = `http://localhost:3000/user/clqx1s9bu0000n5itwg4hlu4w/tvShow`
 
 		const tvShowName = foundedShows.find((show) => show.id === tvShowId)?.name
 		const tvShowPoster = foundedShows.find(
@@ -94,7 +94,7 @@ export default function SearchTvShow() {
 			method: 'POST',
 			headers: {
 				Authorization:
-					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbHFwdzFkYWcwMDAwM3piZXJ0cmZqMmhlIiwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNzAzOTcwOTU3LCJleHAiOjE3MDY1NjI5NTd9.USDv-58wUMvVWeUGKz9Xt60Rc6n58Oq6PkPo77XztNY',
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbHF4MXM5YnUwMDAwbjVpdHdnNGhsdTR3IiwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNzA0MjQyMjAwLCJleHAiOjE3MDY4MzQyMDB9.V6squSL-rWMMBwcrzrqloODGHzUhNwAY0cMxU00g6CQ',
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({

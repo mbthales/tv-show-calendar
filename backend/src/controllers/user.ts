@@ -57,7 +57,6 @@ export const registerController = async (
 
 		reply.code(201).send({
 			msg: 'User created successfully',
-			data: user,
 		})
 	} catch (err) {
 		console.error(err)

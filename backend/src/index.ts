@@ -3,7 +3,7 @@ import cookie from '@fastify/cookie'
 import cors from '@fastify/cors'
 
 import userRoutes from './routes/user'
-import { tvShowRoutes } from './routes/tvShow'
+import { tvShowRoutes } from './routes/favTvShow'
 
 const app = fastify()
 

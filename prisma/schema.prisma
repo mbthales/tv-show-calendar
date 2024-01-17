@@ -1,0 +1,21 @@
+generator client {
+   provider = "prisma-client-js"
+}
+
+datasource db {
+   provider = "postgresql"
+   url      = env("DATABASE_URL")
+}
+
+model TvShow {
+   id        String   @id @default(cuid())
+   tvShowId  String
+   name      String
+   episodes  String
+   premiered String
+   userId    String
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+
+   @@unique([tvShowId, userId])
+}

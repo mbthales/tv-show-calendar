@@ -14,10 +14,9 @@ export default function TvShows() {
 	const userId = user?.id.split('_')[1]
 
 	const getUserTvShows = async () => {
-		const url = `/api/tvshow/${userId}`
+		const url = `/api/tvshow/user/${userId}`
 		const res = await fetch(url)
 		const { data }: UserTvShowsI = await res.json()
-		console.log(data)
 		const tvShows = data.map((tvShow) => {
 			return tvShow.tvShowId
 		})
@@ -36,7 +35,7 @@ export default function TvShows() {
 				name: tvShow.show.name,
 				premiered: tvShow.show.premiered,
 				poster: tvShow.show.image ? tvShow.show.image.original : null,
-				id: tvShow.show.id,
+				tvShowId: tvShow.show.id,
 				isWatched: userTvShows.includes(String(tvShow.show.id))
 					? true
 					: false,

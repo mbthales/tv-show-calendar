@@ -17,33 +17,43 @@ export default function TvShowsFound({ tvShows, userId }: TvShowsFoundPropsI) {
 				airdate: episode.airdate,
 				number: episode.number,
 				season: episode.season,
-				epTitle: episode.name,
+				name: episode.name,
+				isWatched: false,
 			}
 		})
 
 		return JSON.stringify(formattedData)
 	}
 
+	const removeTvShowAsWatched = async (tvShowId: string) => {
+		const url = `/api/tvshow/user/${userId}`
+
+		await fetch(url, {
+			method: 'DELETE',
+			body: JSON.stringify({
+				tvShowId: String(tvShowId),
+			}),
+		})
+	}
+
 	const markTvShowAsWatched = async (tvShow: TvShowFoundI) => {
-		const url = `/api/tvshow/${userId}`
-		const res = await fetch(url, {
+		const url = `/api/tvshow/user/${userId}`
+		await fetch(url, {
 			method: 'POST',
 			body: JSON.stringify({
 				name: tvShow.name,
-				tvShowId: String(tvShow.id),
+				tvShowId: String(tvShow.tvShowId),
 				premiered: tvShow.premiered,
-				episodes: await getTvShowEpisodes(tvShow.id),
+				episodes: await getTvShowEpisodes(tvShow.tvShowId),
 			}),
 		})
-		const data = await res.json()
-		console.log(data)
 	}
 
 	return (
 		<div className="flex flex-col">
 			{tvShows.map((tvShow) => {
 				return (
-					<div key={tvShow.id} className="flex flex-col">
+					<div key={tvShow.tvShowId} className="flex flex-col">
 						<div>
 							<p>{tvShow.name}</p>
 							<p>{tvShow.premiered}</p>
@@ -57,7 +67,11 @@ export default function TvShowsFound({ tvShows, userId }: TvShowsFoundPropsI) {
 							)}
 						</div>
 						{tvShow.isWatched ? (
-							<button>Added</button>
+							<button
+								onClick={() => removeTvShowAsWatched(tvShow.tvShowId)}
+							>
+								Added
+							</button>
 						) : (
 							<button onClick={() => markTvShowAsWatched(tvShow)}>
 								Add

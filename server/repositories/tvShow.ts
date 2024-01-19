@@ -7,8 +7,6 @@ export const createTvShow = async (data: TvShowI) => {
 		data,
 	})
 
-	prisma.$disconnect()
-
 	return tvShow
 }
 
@@ -22,8 +20,6 @@ export const findTvShowByUserId = async (userId: string, tvShowId: string) => {
 		},
 	})
 
-	prisma.$disconnect()
-
 	return tvShow
 }
 
@@ -33,8 +29,6 @@ export const getUserTvShows = async (userId: string) => {
 			userId,
 		},
 	})
-
-	prisma.$disconnect()
 
 	return tvShows
 }
@@ -48,8 +42,6 @@ export const deleteTvShow = async (userId: string, tvShowId: string) => {
 			},
 		},
 	})
-
-	prisma.$disconnect()
 
 	return tvShow
 }

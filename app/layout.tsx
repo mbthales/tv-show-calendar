@@ -6,9 +6,12 @@ import { ClerkProvider } from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ['latin'] })
 
+import Header from './components/Header'
+
 export const metadata: Metadata = {
 	title: 'Tv Show Calendar',
-	description: 'A calendar for tracking tv shows',
+	description:
+		'Follow your favorite tv shows and never miss an episode again.',
 }
 
 export default function RootLayout({

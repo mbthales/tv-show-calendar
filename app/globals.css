@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body,
+main {
+	height: 100%;
+	width: 100%;
+
+	@apply bg-slate-800 text-white;
+}
+
+.hover-underline-animation {
+	display: inline-block;
+	position: relative;
+	padding-bottom: 3px;
+}
+
+.hover-underline-animation:after {
+	content: '';
+	display: block;
+	width: 0;
+	height: 2px;
+	transition: width 0.4s;
+	position: absolute;
+	bottom: 0;
+
+	@apply bg-white;
+}
+
+.hover-underline-animation:hover:after {
+	width: 100%;
+}
+
+.cl-formButtonPrimary {
+	@apply bg-slate-800 text-sm normal-case hover:bg-slate-500;
+}
+
+.cl-internal-b3fm6y {
+	@apply bg-slate-800 hover:bg-slate-500;
+}
+
+.cl-footerActionLink {
+	@apply text-gray-500 hover:text-gray-600;
+}

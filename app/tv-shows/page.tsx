@@ -5,6 +5,8 @@ import { useState } from 'react'
 
 import TvShowsFound from '@/app/components/TvShowsFound'
 
+import Header from '../components/Header'
+
 import type { TvShowApiI, TvShowFoundI, UserTvShowsI } from '@/app/types/tvShow'
 
 export default function TvShows() {
@@ -46,16 +48,16 @@ export default function TvShows() {
 	}
 
 	return (
-		<div className="flex flex-col">
-			<div>
-				<UserButton afterSignOutUrl="/" />
-			</div>
-			<input
-				className="text-black"
-				type="text"
-				onChange={(e) => searchTvShow(e.target.value)}
-			/>
-			<TvShowsFound tvShows={tvShowsFound} userId={userId!} />
-		</div>
+		<>
+			<Header />
+			<main className="flex flex-col">
+				<input
+					className="text-black"
+					type="text"
+					onChange={(e) => searchTvShow(e.target.value)}
+				/>
+				<TvShowsFound tvShows={tvShowsFound} userId={userId!} />
+			</main>
+		</>
 	)
 }
